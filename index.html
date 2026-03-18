@@ -3,265 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cottagecore Game UI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --wood-dark: #6d4c41;
-            --wood-medium: #8d6e63;
-            --wood-light: #bcaaa4;
-            --cream: #fff9f0;
-            --sage: #a8ba9a;
-            --strawberry: #ff8a80;
-            --sunshine: #ffe082;
-        }
-
-        body {
-            margin: 0;
-            padding: 25px;
-            background: radial-gradient(circle, #e8f5e9 0%, #c8e6c9 100%);
-            font-family: 'Quicksand', sans-serif;
-            color: #4e342e;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            overflow: hidden;
-            user-select: none;
-        }
-
-        /* --- UI ANIMATIONS --- */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-            100% { transform: translateY(0px); }
-        }
-
-        @keyframes squish {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05, 0.95); }
-            100% { transform: scale(1); }
-        }
-
-        /* --- TOP UI: Portrait & Money --- */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .profile-card {
-            background: var(--wood-medium);
-            border: 5px solid var(--wood-dark);
-            border-radius: 20px;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 6px 0 var(--wood-dark);
-            animation: float 4s ease-in-out infinite;
-        }
-
-        .avatar-circle {
-            width: 55px;
-            height: 55px;
-            background: var(--strawberry);
-            border: 3px solid white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-        }
-
-        .stat-bars { display: flex; flex-direction: column; gap: 5px; }
-        
-        .bar {
-            width: 120px;
-            height: 12px;
-            background: #3e2723;
-            border-radius: 10px;
-            border: 2px solid var(--wood-dark);
-            overflow: hidden;
-        }
-
-        .fill-hp { background: #81c784; width: 90%; height: 100%; transition: 0.5s; }
-        .fill-st { background: #ffd54f; width: 40%; height: 100%; transition: 0.5s; }
-
-        /* --- SHOP MODAL (Hidden by default) --- */
-        #shopOverlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.4);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-        }
-
-        .shop-window {
-            background: var(--cream);
-            border: 10px solid var(--wood-medium);
-            outline: 5px solid var(--wood-dark);
-            border-radius: 30px;
-            width: 350px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-
-        .shop-items {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .shop-item {
-            background: white;
-            border: 3px solid var(--wood-light);
-            border-radius: 15px;
-            padding: 10px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .shop-item:hover { transform: translateY(-5px) rotate(3deg); border-color: var(--sage); }
-
-        /* --- MAIN JOURNAL --- */
-        .journal {
-            background: #fffdf7;
-            border: 2px solid #e0d5c1;
-            box-shadow: 5px 5px 0 #d7ccc8;
-            padding: 30px;
-            width: 400px;
-            margin: 0 auto;
-            position: relative;
-            transform: rotate(-1deg);
-        }
-
-        .journal::before { /* Binder rings */
-            content: '● ● ● ●';
-            position: absolute;
-            left: -15px;
-            top: 20px;
-            color: #a1887f;
-            letter-spacing: 20px;
-            writing-mode: vertical-rl;
-        }
-
-        /* --- HOTBAR --- */
-        .hotbar-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .hotbar {
-            background: var(--wood-medium);
-            padding: 10px;
-            border-radius: 20px;
-            border: 5px solid var(--wood-dark);
-            display: flex;
-            gap: 12px;
-            box-shadow: 0 6px 0 var(--wood-dark);
-        }
-
-        .item-slot {
-            width: 55px;
-            height: 55px;
-            background: var(--cream);
-            border: 3px solid var(--wood-dark);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .item-slot:hover {
-            transform: scale(1.15);
-            background: white;
-        }
-
-        .shop-btn {
-            background: var(--sunshine);
-            border: 4px solid var(--wood-dark);
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 0 var(--wood-dark);
-        }
-
-        .shop-btn:active { transform: translateY(4px); box-shadow: none; }
-
-    </style>
+    <title>My Cozy Farm UI</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="header">
-        <div class="profile-card">
-            <div class="avatar-circle">🌱</div>
-            <div class="stat-bars">
-                <div class="bar"><div class="fill-hp"></div></div>
-                <div class="bar"><div class="fill-st"></div></div>
+    <div class="game-container">
+        <div class="status-bar">
+            <div class="profile-frame">
+                <div class="avatar"></div>
+            </div>
+            <div class="stats">
+                <div class="bar-container">
+                    <span>HP</span>
+                    <div class="bar health"><div class="fill" style="width: 80%;"></div></div>
+                </div>
+                <div class="bar-container">
+                    <span>STAMINA</span>
+                    <div class="bar stamina"><div class="fill" style="width: 60%;"></div></div>
+                </div>
+            </div>
+            <div class="currency-tag">
+                🪙 <span id="gold-count">001250</span>
             </div>
         </div>
-        <div class="profile-card" style="background: var(--sage);">
-            <span style="color: white; font-weight: bold;">💰 002,450G</span>
+
+        <main class="journal">
+            <h1>Daily Tasks</h1>
+            <p>Don't forget to water the sunflowers!</p>
+            <div class="sticker">Hazardous Waste</div>
+        </main>
+
+        <div class="inventory">
+            <div class="slot active" onclick="selectSlot(this)">🌱</div>
+            <div class="slot" onclick="selectSlot(this)">💧</div>
+            <div class="slot" onclick="selectSlot(this)">🍎</div>
+            <div class="slot" onclick="selectSlot(this)">🪓</div>
+            <div class="slot" onclick="selectSlot(this)">🪄</div>
         </div>
     </div>
 
-    <div class="journal">
-        <h2 style="font-family: 'Fredoka One', cursive; color: var(--wood-dark);">Today's Goals</h2>
-        <p>🌻 Plant 5 Sunflower seeds</p>
-        <p>🍯 Collect honey from hives</p>
-        <p>🥧 Bake a pie for neighbor</p>
-    </div>
-
-    <div class="hotbar-container">
-        <div class="hotbar">
-            <div class="item-slot">🧺</div>
-            <div class="item-slot">✂️</div>
-            <div class="item-slot">🧪</div>
-            <div class="item-slot">🍞</div>
-        </div>
-        <button class="shop-btn" onclick="toggleShop()">🏪</button>
-    </div>
-
-    <div id="shopOverlay" onclick="toggleShop()">
-        <div class="shop-window" onclick="event.stopPropagation()">
-            <h2 style="font-family: 'Fredoka One';">Pierre's Seeds</h2>
-            <div class="shop-items">
-                <div class="shop-item">🎃<br><small>10G</small></div>
-                <div class="shop-item">🌽<br><small>15G</small></div>
-                <div class="shop-item">🌷<br><small>20G</small></div>
-                <div class="shop-item">🍎<br><small>50G</small></div>
-                <div class="shop-item">👒<br><small>100G</small></div>
-                <div class="shop-item">☕<br><small>5G</small></div>
-            </div>
-            <button onclick="toggleShop()" style="margin-top: 20px; border-radius: 10px; padding: 5px 15px; cursor: pointer;">Close</button>
-        </div>
-    </div>
-
-    <script>
-        function toggleShop() {
-            const shop = document.getElementById('shopOverlay');
-            shop.style.display = (shop.style.display === 'flex') ? 'none' : 'flex';
-        }
-
-        // Add a "squish" effect when clicking items
-        document.querySelectorAll('.item-slot').forEach(slot => {
-            slot.addEventListener('click', function() {
-                this.style.animation = 'squish 0.3s ease';
-                setTimeout(() => this.style.animation = '', 300);
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
